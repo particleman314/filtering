@@ -5,11 +5,11 @@ import measurements.MeasurementType;
 import models.Model;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Vector;
 
 public class ClusterMeasurement extends Measurement {
 
-    private HashMap<MeasurementType, LinkedList<Measurement>> constitutentMeasurements;
+    private HashMap<MeasurementType, Vector<Measurement>> _constitutentMeasurements;
 
     public Measurement convertTo(Model model) {
         return null;

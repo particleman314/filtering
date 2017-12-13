@@ -1,14 +1,14 @@
 package states;
 
-import java.util.ArrayList;
+import mathwrapper.MathVector;
 
 public class State implements StateInterface {
 
     private StateType _stateType;
-    protected ArrayList<Double> _stateVector;
+    protected MathVector _stateVector;
     private Boolean _isValid;
 
-    public State( ArrayList<Double> X0, StateType stateType ) {
+    public State( MathVector X0, StateType stateType ) {
         this._stateVector = X0;
         this._stateType = stateType;
         this.validateState();

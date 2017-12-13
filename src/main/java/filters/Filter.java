@@ -1,10 +1,11 @@
 package filters;
 
-import math.matrices.Matrix;
+import mathwrapper.MathMatrix;
 import measurements.Measurement;
 import states.State;
 
 public class Filter implements FilterInterface {
+
     public State predict() {
         return null;
     }
@@ -13,7 +14,7 @@ public class Filter implements FilterInterface {
         return null;
     }
 
-    public Matrix computeGain() {
+    public MathMatrix computeGain() {
         return null;
     }
 }

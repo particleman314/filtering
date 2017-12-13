@@ -1,15 +1,15 @@
 package filters;
 
-import math.matrices.Matrix;
+import mathwrapper.MathMatrix;
 
 import java.util.ArrayList;
 
 public class IMM extends Filter {
     Boolean _isValid;
     ArrayList<Filter> _filters;
-    Matrix _transitions;
+    MathMatrix _transitions;
 
-    public IMM(ArrayList<Filter> filters, Matrix transitionValues) {
+    public IMM(ArrayList<Filter> filters, MathMatrix transitionValues) {
         this._filters = filters;
         this._transitions = transitionValues;
         this._isValid = false;
@@ -19,8 +19,8 @@ public class IMM extends Filter {
     private void validateFilter() {
         if ( this._filters != null ) {
             int numFilters = this._filters.size();
-            if ( this._transitions.getRowDimensions() == numFilters ||
-                    this._transitions.getColumnDimensions() == numFilters ) {
+            if ( this._transitions.getMatrixData().getRows() == numFilters ||
+                    this._transitions.getMatrixData().getColumns() == numFilters ) {
                 this._isValid = true;
             }
         }

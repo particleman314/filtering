@@ -1,15 +1,16 @@
 package scoring;
 
+import mathwrapper.MathMatrix;
+import mathwrapper.MathVector;
 import measurements.Measurement;
 import measurements.exceptions.BadMeasurementTypeException;
-import org.jblas.DoubleMatrix;
 
 public class MahalanobisMetric extends Scorer {
     public Double calculateScore(Measurement meas1, Measurement meas2) throws BadMeasurementTypeException {
-        DoubleMatrix measurementDifference = meas1.getMeasurement().sub(meas2.getMeasurement());
-        DoubleMatrix measurementErrors = meas1.getMeasurementError().add(meas2.getMeasurementError());
+        MathVector measurementDifference = meas1.getMeasurement().subtract(meas2.getMeasurement());
+        MathMatrix measurementErrors = meas1.getMeasurementError().addition(meas2.getMeasurementError());
 
-        return measurementDifference.muliRowVector(measurementErrors.mulColumnVector(measurementDifference)).get(0);
+        return measurementDifference.transpose().dotProduct(measurementErrors.multiply(measurementDifference));
     }
 
 }

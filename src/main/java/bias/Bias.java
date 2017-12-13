@@ -1,13 +1,27 @@
 package bias;
 
-import org.jblas.DoubleMatrix;
+import mathwrapper.MathMatrix;
+import mathwrapper.MathVector;
 
 public class Bias {
-    DoubleMatrix _biasVector;
-    DoubleMatrix _biasMatrix;
+
+    private MathVector _biasVector;
+    private MathMatrix _biasMatrix;
+    private Boolean _isValid;
 
     public Bias(Integer rows, Integer cols) {
-        this._biasMatrix = new DoubleMatrix.zeros(rows, cols);
-        this._biasVector = new DoubleMatrix.zeros(rows);
+        if ( rows <= 0 || cols <= 0 ) {
+            this._initializeClass();
+        } else {
+            this._biasMatrix = new MathMatrix(rows, cols, 0.0);
+            this._biasVector = new MathVector(cols, 0.0);
+            this._isValid = true;
+        }
+    }
+
+    private void _initializeClass() {
+        this._biasMatrix = new MathMatrix();
+        this._biasVector = new MathVector();
+        this._isValid = false;
     }
 }

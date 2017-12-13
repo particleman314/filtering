@@ -2,8 +2,9 @@ package measurements;
 
 import bias.Bias;
 import features.Feature;
+import mathwrapper.MathMatrix;
+import mathwrapper.MathVector;
 import measurements.exceptions.BadMeasurementTypeException;
-import org.jblas.DoubleMatrix;
 
 import java.util.HashMap;
 
@@ -11,8 +12,8 @@ abstract public class Measurement implements MeasurementInterface {
 
     protected MeasurementType _measType;
 
-    private DoubleMatrix _measurementData;
-    private DoubleMatrix _measurementNoise;
+    private MathVector _measurementData;
+    private MathMatrix _measurementNoise;
 
     private Bias _measSystematicBias;
     private HashMap<String, Feature> _measFeatures;
@@ -21,15 +22,15 @@ abstract public class Measurement implements MeasurementInterface {
         return this._measType.getTypeID();
     }
 
-    public DoubleMatrix getMeasurement() {
+    public MathVector getMeasurement() {
         return this._measurementData;
     }
 
     protected void setMeasurement(Integer size) {
-        this._measurementData = new DoubleMatrix(3);
+        this._measurementData = new MathVector(3);
     }
 
-    protected void setMeasurement(DoubleMatrix data) {
+    protected void setMeasurement(MathVector data) {
         this._measurementData = data;
     }
 
@@ -41,11 +42,10 @@ abstract public class Measurement implements MeasurementInterface {
         return this._measFeatures.containsKey(featureType);
     }
 
-    public DoubleMatrix getMeasurementError() throws BadMeasurementTypeException {
+    public MathMatrix getMeasurementError() throws BadMeasurementTypeException {
         if ( this._measurementNoise == null ) {
             Integer size = this._measType.size();
-            DoubleMatrix D = new DoubleMatrix(size);
-            D.fill(0.0);
+            MathMatrix D = new MathMatrix(size, size,0.0);
             return D;
         } else {
             return this._measurementNoise;
